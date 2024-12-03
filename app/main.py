@@ -2,21 +2,24 @@ from fastapi import FastAPI, HTTPException, status, BackgroundTasks
 from .database.database import registration_collection
 from .services.email_utils import send_email
 import httpx
+import html
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from .models.models import Registration
 from .config.settings import settings
+from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 app = FastAPI(title="FastAPI Registration Portal")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],  # Replace "*" with specific origins
     allow_credentials=True,
-    allow_methods=["*"],  
+    allow_methods=["POST"],  # Restrict to only needed HTTP methods,  
     allow_headers=["*"], 
 )
+app.add_middleware(HTTPSRedirectMiddleware)
 
 # Rate limiter
 limiter = Limiter(
@@ -49,6 +52,16 @@ async def register_user(
     registration: Registration, 
     background_tasks: BackgroundTasks
 ):
+    # Sanitize user input to prevent XSS
+    registration.team_name = html.escape(registration.team_name)
+    for participant in registration.participants:
+        participant.name = html.escape(participant.name)
+        participant.email = html.escape(participant.email)
+        participant.student_no = html.escape(participant.student_no)
+        participant.mobile = html.escape(participant.mobile)
+        participant.unstop = html.escape(participant.unstop)
+
+    #call the recaptcha verification function
     is_valid = await verify_recaptcha(registration.recaptcha_response)
     
     if not is_valid:
