@@ -26,6 +26,7 @@ class Participant(BaseModel):
 
 class Registration(BaseModel):
     team_name: str = Field(..., min_length=2, max_length=100)
+    domain_name: str = Field(..., min_length=2, max_length=100)
     participants: List[Participant] = Field(..., min_items=2, max_items=2)
     recaptcha_response: str = Field(..., min_length=10, exclude=True)
 

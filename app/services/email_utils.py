@@ -10,17 +10,40 @@ async def send_email(email: str, name: str):
     """
     # Create HTML content for the email
     message = f"""
-    <html>
-    <body>
-        <p>Dear {name},</p>
-        <p>Thank you for registering on our platform. Here are your details:</p>
-        <ul>
-            <li><b>Name:</b> {name}</li>
-            <li><b>Email:</b> {email}</li>
-        </ul>
-        <p>Best regards,<br>Your Team</p>
-    </body>
-    </html>
+    <!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registration Successful!</h1>
+        </div>
+        <div class="content">
+            <p>Congratulations, <span class="highlight">{name}</span>! Your registration for <strong>DevClash</strong> has been successfully completed. 🎉</p>
+            <p><em>“Unleash your creativity, solve challenges, and make your mark in the world of development!” ⭐</em></p>
+            <p>Get ready for two exciting rounds:</p>
+            <ul>
+                <li><strong>Elimination Round:</strong> Test your technical knowledge and compete for a spot in the top 10 teams.</li>
+                <li><strong>Development Round:</strong> Build app or web pages based on provided designs.</li>
+            </ul>
+            <p><span class="highlight">🌟 Grand Prizes:</span> Cash prizes for the top two teams in both app and web categories!</p>
+            <p><strong>📅 Date:</strong> 6th December 2024<br>
+               <strong>⏲️ Time:</strong> 4pm onwards<br>
+               <strong>📍 Venue:</strong> IT labs, 3rd Floor, CSIT</p>
+            
+            <p>If you have any questions, feel free to contact:</p>
+            <ul>
+                <li>Prakhar Srivastava: 8707074420</li>
+                <li>Manoj Samantha</li>
+            </ul>
+        </div>
+        <div class="footer">
+            &copy; 2024 DevClash | Organized by Cloud Computing Cell
+        </div>
+    </div>
+</body>
+</html>
+
+
     """
     smtp_host = settings.EMAIL_HOST
     smtp_port = settings.EMAIL_PORT

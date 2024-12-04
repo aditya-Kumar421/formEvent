@@ -54,6 +54,7 @@ async def register_user(
 ):
     # Sanitize user input to prevent XSS
     registration.team_name = html.escape(registration.team_name)
+    registration.domain_name = html.escape(registration.domain_name)
     for participant in registration.participants:
         participant.name = html.escape(participant.name)
         participant.email = html.escape(participant.email)
