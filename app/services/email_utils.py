@@ -5,48 +5,14 @@ import smtplib
 from app.config.settings import settings
 from pathlib import Path
 
+
+
 async def send_email(email: str, name: str):
-    
     """
     Sends a confirmation email with HTML content.
     """
-    # Create HTML content for the email
-#     message = f"""
-#     <!DOCTYPE html>
-# <html lang="en">
-# <body>
-#     <div class="container">
-#         <div class="header">
-#             <h1>Registration Successful!</h1>
-#         </div>
-#         <div class="content">
-#             <p>Congratulations, <span class="highlight">{name}</span>! Your registration for <strong>DevClash</strong> has been successfully completed. 🎉</p>
-#             <p><em>“Unleash your creativity, solve challenges, and make your mark in the world of development!” ⭐</em></p>
-#             <p>Get ready for two exciting rounds:</p>
-#             <ul>
-#                 <li><strong>Elimination Round:</strong> Test your technical knowledge and compete for a spot in the top 10 teams.</li>
-#                 <li><strong>Development Round:</strong> Build app or web pages based on provided designs.</li>
-#             </ul>
-#             <p><span class="highlight">🌟 Grand Prizes:</span> Cash prizes for the top two teams in both app and web categories!</p>
-#             <p><strong>📅 Date:</strong> 6th December 2024<br>
-#                <strong>⏲️ Time:</strong> 4pm onwards<br>
-#                <strong>📍 Venue:</strong> IT labs, 3rd Floor, CSIT</p>
-            
-#             <p>If you have any questions, feel free to contact:</p>
-#             <ul>
-#                 <li>Prakhar Srivastava: 8707074420</li>
-#                 <li>Manoj Samantha</li>
-#             </ul>
-#         </div>
-#         <div class="footer">
-#             &copy; 2024 DevClash | Organized by Cloud Computing Cell
-#         </div>
-#     </div>
-# </body>
-# </html>
-#     """
     html_path = Path("email_template.html")
-    html_content = html_path.read_text()
+    html_content = html_path.read_text(encoding="utf-8")
     html_content = html_content.replace("{{ name }}", name)
 
     smtp_host = settings.EMAIL_HOST
