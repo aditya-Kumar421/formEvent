@@ -46,3 +46,4 @@ class Registration(BaseModel):
         if len(value) != 2:
             raise ValueError("Exactly two participants are required.")
         return value
+

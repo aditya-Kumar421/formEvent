@@ -11,7 +11,7 @@ async def send_email(email: str, name: str):
     """
     Sends a confirmation email with HTML content.
     """
-    html_path = Path("email_template.html")
+    html_path = Path("templates/email_template.html")
     html_content = html_path.read_text(encoding="utf-8")
     html_content = html_content.replace("{{ name }}", name)
 
