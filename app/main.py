@@ -14,7 +14,7 @@ app = FastAPI(title="FastAPI Registration Portal")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Replace "*" with specific origins , "https://your-frontend-domain.com"
+    allow_origins=["*"],  # Replace "*" with specific origins , "https://your-frontend-domain.com"
     allow_credentials=True,
     allow_methods=["*"],  # Restrict to only needed HTTP methods,  
     allow_headers=["*"], 
