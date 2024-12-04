@@ -8,18 +8,18 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from .models.models import Registration
 from .config.settings import settings
-from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
+# from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 app = FastAPI(title="FastAPI Registration Portal")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace "*" with specific origins
+    allow_origins=["http://localhost:5173"],  # Replace "*" with specific origins , "https://your-frontend-domain.com"
     allow_credentials=True,
-    allow_methods=["POST"],  # Restrict to only needed HTTP methods,  
+    allow_methods=["*"],  # Restrict to only needed HTTP methods,  
     allow_headers=["*"], 
 )
-app.add_middleware(HTTPSRedirectMiddleware)
+# app.add_middleware(HTTPSRedirectMiddleware)
 
 # Rate limiter
 limiter = Limiter(
