@@ -7,7 +7,12 @@ app = FastAPI()
 class Participant(BaseModel):
     name: str = Field(..., min_length=2, max_length=50)
     email: EmailStr
-    student_no: str = Field(..., pattern="^23.*")
+    student_no: str = Field(
+        ...,
+        pattern="^(23|24).*",
+        min_length=5,
+        max_length=11
+    )
     mobile: str = Field(..., pattern="^[0-9]{10}$")
     gender: str = Field(..., min_length=3, max_length=8) 
     branch: str = Field(..., min_length=2, max_length=50)
