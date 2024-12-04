@@ -9,7 +9,7 @@ class Participant(BaseModel):
     email: EmailStr
     student_no: str = Field(
         ...,
-        pattern="^(23|24).*",
+        pattern=r"^(23|24)[A-Za-z0-9]*$",  # Matches student numbers starting with 23 or 24
         min_length=5,
         max_length=11
     )
@@ -26,6 +26,12 @@ class Participant(BaseModel):
             raise ValueError("Email must end with '@akgec.ac.in'.")
         if student_no and student_no not in value:
             raise ValueError("Email must contain the student number.")
+        return value
+    
+    @field_validator("student_no")
+    def validate_student_no(cls, value):
+        if not value.startswith(("23", "24")):
+            raise ValueError("Student number must start with 23 or 24.")
         return value
 
 
