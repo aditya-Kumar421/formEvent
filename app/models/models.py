@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import List
+from typing import Optional
 
 app = FastAPI()
 
@@ -16,7 +17,7 @@ class Participant(BaseModel):
     mobile: str = Field(..., pattern="^[0-9]{10}$")
     gender: str = Field(..., min_length=3, max_length=8) 
     branch: str = Field(..., min_length=2, max_length=50)
-    unstop: str = Field(..., min_length=1, max_length=50)
+    unstop: Optional[str] = Field(None, max_length=50)
     residence: str = Field(..., min_length=2, max_length=100)
 
     @field_validator("email")

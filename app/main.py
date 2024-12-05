@@ -47,6 +47,7 @@ async def verify_recaptcha(recaptcha_response: str) -> bool:
     return result.get("success", False)
 
 #post data to the database
+
 @app.post("/register", status_code=status.HTTP_201_CREATED)
 async def register_user(
     registration: Registration, 
