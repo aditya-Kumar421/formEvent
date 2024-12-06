@@ -61,7 +61,7 @@ async def register_user(
         participant.email = html.escape(participant.email)
         participant.student_no = html.escape(participant.student_no)
         participant.mobile = html.escape(participant.mobile)
-        participant.unstop = html.escape(participant.unstop)
+        participant.unstop = html.escape(participant.unstop or "")
 
     #call the recaptcha verification function
     is_valid = await verify_recaptcha(registration.recaptcha_response)
